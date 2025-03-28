@@ -4,8 +4,8 @@ import { assets } from "../../../assets/assets";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
-export default function Page() {
-    const [image, setImage] = useState("");
+export default function Page({params}) {
+    // const [image, setImage] = useState("");
 
     const [data,setdata] =useState({
         title:"",
@@ -14,6 +14,8 @@ export default function Page() {
         author:""
     })
 
+    const id = params.ids
+
     const handlechange = (e) => {
         const {value,name} = e.target;
         setdata((data)=>({...data,[name]:value,}))
@@ -21,24 +23,27 @@ export default function Page() {
 
     const handlesubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('title',data.title);
-        formData.append('description',data.description);
-        formData.append('category',data.category);
-        formData.append('author',data.author);
-        formData.append('image',image);
+        // const formData = new FormData();
+        // formData.append('title',data.title);
+        // formData.append('description',data.description);
+        // formData.append('category',data.category);
+        // formData.append('author',data.author);
+        // formData.append('image',image);
 
-        console.log("formdata",formData)
-        console.log("image",image)
+        // console.log("formdata",formData)
+        // console.log("image",image)
 
         try {
-            const result = await fetch('http://localhost:3000/api/blog',{
-                method:'POST',
-                body: formData
+            const result = await fetch(`http://localhost:3000/api/blog/${id}`,{
+                method:'PUT',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(data)
             })
             const res = await result.json();
-            if (res.data.success) {
-                toast.success(res.data.results);
+            if (res.success) {
+                toast.success("Edited Successfully");
             }
             else{
                 toast.error("error");
@@ -62,7 +67,7 @@ export default function Page() {
             <form onSubmit={handlesubmit} className="max-w-lg w-full bg-white shadow-xl rounded-lg p-8 space-y-6">
                 <p className="text-2xl font-semibold text-center text-gray-800">Upload Thumbnail</p>
                 
-                <label htmlFor="thumbnail" className="flex items-center justify-center cursor-pointer mb-6">
+                {/* <label htmlFor="thumbnail" className="flex items-center justify-center cursor-pointer mb-6">
                     <div className="w-28 h-28 flex items-center justify-center bg-gray-100 rounded-lg border-2 border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-500 hover:shadow-lg">
                         <Image
                             src={image ? URL.createObjectURL(image) : assets.upload}
@@ -72,9 +77,9 @@ export default function Page() {
                             className="object-cover rounded-lg"
                         />
                     </div>
-                </label>
+                </label> */}
 
-                <input
+                {/* <input
                     type="file"
                     id="thumbnail"
                     className="hidden"
@@ -83,7 +88,7 @@ export default function Page() {
 
                 <div className="text-center text-sm text-gray-600">
                     <p>Click to upload your thumbnail. It should be a square image.</p>
-                </div>
+                </div> */}
 
                 
                 <p className="text-xl mt-4">Blog Title</p>

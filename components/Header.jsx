@@ -19,7 +19,7 @@ export default function Header() {
       <div className="text-center my-5">
         <h1 className="text-3xl font-medium sm:5xl">Latest Blogs</h1>
         <p className="mt-5 mx-20 flex align-center justify-center text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. In deserunt dignissimos delectus reprehenderit tenetur, esse ipsum autem voluptas accusamus culpa velit fuga voluptates omnis quas at eligendi. Minima, incidunt mollitia?</p>
-        <form className="flex justify-between border-1 border-black  mt-10 mx-90 h-[auto] shadow-[-7px_7px_0px_#000000]">
+        <form className="flex mt-5 justify-between border-1 border-black shadow-[-7px_7px_0px_#000000]">
             <input type="tel" placeholder="Enter Your Email"
             className="mx-20 items-center flex justify-center align-center px-1"
             />
